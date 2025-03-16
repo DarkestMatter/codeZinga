@@ -3,7 +3,7 @@ import { JsEditor } from "./components/editor/JsEditor";
 
 export const Router: React.FC = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/codeZinga">
       <Routes>
         <Route path="/" element={<JsEditor />} />
       </Routes>
