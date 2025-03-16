@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IEditor } from "../interface/IEditor";
 
 const initialState: IEditor = {
-  code: "",
+  code: "console.log('//Welocme to CodeZinga//');",
   loading: false,
 };
 
@@ -14,7 +14,13 @@ export const editorSlice = createSlice({
       state.code = action.payload;
     },
     updateCompiledCode: (state, action: PayloadAction<string>) => {
-      state.output = action.payload;
+      if (action.payload === "~~clear()~~") {
+        state.output = [];
+        return;
+      }
+      state.output = state.output
+        ? [...state.output, action.payload]
+        : [action.payload];
     },
     updateRunBtnLoading: (state, action: PayloadAction<boolean>) => {
       state.loading = action.payload;

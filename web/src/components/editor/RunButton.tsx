@@ -18,30 +18,84 @@ export const RunButton: React.FC = () => {
 
   useEffect(() => {
     const originalLog = console.log;
+    // const originalConsoleError = console.error;
+    // const capturedErrors: string[] = [];
 
     console.log = (...args) => {
-      const logMessage = args.join(" ");
-      dispatch(updateCompiledCode(logMessage));
-      originalLog.apply(console, args); // Keep showing logs in DevTools too
+      const logMessage = args.reduce((a, b) => {
+        typeof b === "object" ? a + JSON.stringify(b) : a + b, "";
+      });
+      dispatch(updateCompiledCode(JSON.stringify(logMessage) || "undefined"));
+      originalLog.apply(console, args);
       dispatch(updateRunBtnLoading(false));
     };
 
-    // Cleanup (restore original console.log when component unmounts)
+    // console.error = (...args) => {
+    //   capturedErrors.push(args.map(String).join(" "));
+    //   dispatch(
+    //     updateCompiledCode(JSON.stringify(capturedErrors) || "undefined")
+    //   );
+    //   originalConsoleError.apply(console, args);
+    //   dispatch(updateRunBtnLoading(false));
+    // };
+
     return () => {
-      console.log = originalLog;
+      console.clear();
     };
-  }, [console.log]);
+  }, []);
 
   const evalCode = (code: string) => {
-    try {
-      eval(code);
-    } catch (e) {
-      console.log(e);
+    window.onerror = function (message, lineno, colno) {
       dispatch(updateRunBtnLoading(false));
+      dispatch(
+        updateCompiledCode(`Global Error: ${message} at ${lineno}:${colno}`)
+      );
+    };
+
+    window.onunhandledrejection = function (event) {
+      const errorMessage =
+        event.reason instanceof Error
+          ? event.reason.message
+          : String(event.reason);
+      dispatch(updateRunBtnLoading(false));
+      dispatch(updateCompiledCode(`Unhandled Promise Error: ${errorMessage}`));
+    };
+
+    try {
+      const result = eval(code);
+      // Optionally check for promise
+      if (result instanceof Promise) {
+        result.catch((err) => {
+          dispatch(updateRunBtnLoading(false));
+          dispatch(updateCompiledCode(`Promise Error: ${err?.message || err}`));
+        });
+      }
+    } catch (e: unknown) {
+      dispatch(updateRunBtnLoading(false));
+
+      const errorMessage = e instanceof Error ? e.message : String(e);
+      const stack = (e as any).stack || "";
+
+      // Extract line number from stack trace
+      const match = stack.match(/<anonymous>:(\d+):\d+/);
+      const lineNum = match ? parseInt(match[1]) : null;
+
+      let codeLine = "";
+      if (lineNum !== null) {
+        const codeLines = code.split("\n");
+        codeLine = codeLines[lineNum - 1]?.trim() || "";
+      }
+
+      const finalErrorMessage = lineNum
+        ? `Error on line ${lineNum}: ${errorMessage}\n ${codeLine}`
+        : `Error: ${errorMessage}`;
+
+      dispatch(updateCompiledCode(finalErrorMessage));
     }
   };
 
   const handleCompile = () => {
+    dispatch(updateCompiledCode("~~clear()~~"));
     dispatch(updateRunBtnLoading(true));
     evalCode(codeText);
   };

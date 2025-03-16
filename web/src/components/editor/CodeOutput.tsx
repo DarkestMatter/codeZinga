@@ -19,7 +19,11 @@ export const CodeOutput: React.FC = () => {
   return (
     <Grid container spacing={2}>
       <Grid size={12}>
-        <CompiledArea>{codeOutput}</CompiledArea>
+        <CompiledArea>
+          {codeOutput?.map((i) => {
+            return <div key={i}>{i}</div>;
+          })}
+        </CompiledArea>
       </Grid>
     </Grid>
   );

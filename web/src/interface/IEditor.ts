@@ -1,5 +1,5 @@
 export interface IEditor {
   code: string;
-  output?: string;
+  output?: string[];
   loading?: boolean;
 }
