@@ -3,12 +3,12 @@ import styled from "styled-components";
 
 export const TextArea = styled.textarea`
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 6px;
+  left: 45px;
   right: 0;
   bottom: 0;
   width: 100%;
-  height: 100vh;
+  height: auto;
   padding: 10px;
   background-color: transparent;
   color: transparent;
@@ -25,7 +25,7 @@ export const TextArea = styled.textarea`
 export const StyledCodeInputBox = styled.div`
   position: relative;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   font-family: monospace;
   font-size: 14px;
   border: 1px solid #ccc;
@@ -38,8 +38,8 @@ export const StyledCodeInputBox = styled.div`
 
 export const StyledHighlightedBox = styled.pre`
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 6px;
+  left: 45px;
   right: 0;
   bottom: 0;
   white-space: pre-wrap;
@@ -53,5 +53,15 @@ export const StyledHighlightedBox = styled.pre`
 `;
 
 export const EditorBox = styled(Grid)`
-  height: 100vh;
+  min-height: 100vh;
+`;
+
+export const NumbersDiv = styled.div`
+  padding: "8px";
+  text-align: left;
+  color: #999;
+  user-select: none;
+  font-family: monospace;
+  line-height: 1.5;
+  white-space: pre-wrap;
 `;

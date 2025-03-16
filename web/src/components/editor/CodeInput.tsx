@@ -4,6 +4,7 @@ import { updateCodeText } from "../../slice/editorSlice";
 import { codeTextSelector } from "../../selector/selector";
 import { highlightSyntax } from "../../common/highlightSyntax";
 import {
+  NumbersDiv,
   StyledCodeInputBox,
   StyledHighlightedBox,
   TextArea,
@@ -47,10 +48,21 @@ export const CodeInput: React.FC = () => {
     }
   };
 
+  const getLineNumbers = () => {
+    const lines = codeText.split("\n").length;
+    const totalDigits =
+      lines.toString().length < 2 ? 2 : lines.toString().length;
+
+    return Array.from({ length: lines }, (_, i) =>
+      String(i + 1).padStart(totalDigits, "0")
+    ).join("\n");
+  };
+
   return (
     <Grid container spacing={2}>
       <Grid size={12}>
         <StyledCodeInputBox>
+          <NumbersDiv>{getLineNumbers()}</NumbersDiv>
           <StyledHighlightedBox
             dangerouslySetInnerHTML={{ __html: highlightSyntax(codeText) }}
           />
