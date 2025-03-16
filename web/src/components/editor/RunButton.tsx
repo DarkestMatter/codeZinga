@@ -1,10 +1,13 @@
 import Button from "@mui/material/Button";
 import { useDispatch, useSelector } from "react-redux";
-import { updateCompiledCode, updateRunBtnLoading } from "../slice/editorSlice";
+import {
+  updateCompiledCode,
+  updateRunBtnLoading,
+} from "../../slice/editorSlice";
 import {
   codeTextSelector,
   isRunBtnLoadingSelector,
-} from "../selector/selector";
+} from "../../selector/selector";
 import { useEffect } from "react";
 
 export const RunButton: React.FC = () => {

@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
-import { codeOutputSelector } from "../selector/selector";
 import styled from "styled-components";
 import Grid from "@mui/material/Grid2";
+import { codeOutputSelector } from "../../selector/selector";
 
 export const CompiledArea = styled.div`
   width: 100%;

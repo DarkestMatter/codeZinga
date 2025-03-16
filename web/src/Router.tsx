@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { JsEditor } from "./editor/JsEditor";
+import { JsEditor } from "./components/editor/JsEditor";
 
 export const Router: React.FC = () => {
   return (

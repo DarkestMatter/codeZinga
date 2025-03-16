@@ -1,12 +1,8 @@
 import Grid from "@mui/material/Grid2";
 import { CodeInput } from "./CodeInput";
 import { RunButton } from "./RunButton";
-import styled from "styled-components";
 import { CodeOutput } from "./CodeOutput";
-
-export const StyledCodeInputBox = styled(Grid)`
-  height: 100vh;
-`;
+import { EditorBox } from "../styled/StyledComps";
 
 export const JsEditor: React.FC = () => {
   return (
@@ -14,12 +10,12 @@ export const JsEditor: React.FC = () => {
       <Grid size={12} style={{ textAlign: "center" }}>
         <RunButton />
       </Grid>
-      <StyledCodeInputBox size={6}>
+      <EditorBox size={6}>
         <CodeInput />
-      </StyledCodeInputBox>
-      <StyledCodeInputBox size={6}>
+      </EditorBox>
+      <EditorBox size={6}>
         <CodeOutput />
-      </StyledCodeInputBox>
+      </EditorBox>
     </Grid>
   );
 };
