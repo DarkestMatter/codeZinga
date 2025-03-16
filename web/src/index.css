@@ -9,3 +9,32 @@
   -moz-osx-font-smoothing: grayscale;
   
 }
+
+
+/* Highlight Colors */
+.keyword-blue {
+  color: #4fc3f7;
+  font-weight: bold;
+}
+.keyword-green {
+  color: #81c784;
+  font-weight: bold;
+}
+.keyword-purple {
+  color: #ba68c8;
+}
+.keyword-yellow {
+  color: #fdd835;
+}
+.keyword-pink {
+  color: #f06292;
+}
+.keyword-grey {
+  color: #989ea3;
+}
+.comment-fade {
+  color: #c5c0c0;
+}
+.string-lightRed {
+  color: #f07474;
+}
