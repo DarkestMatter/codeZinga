@@ -20,6 +20,7 @@ export const TextArea = styled.textarea`
   font-size: 14px;
   outline: none;
   line-height: 1.5;
+  margin-top: -7px;
 `;
 
 export const StyledCodeInputBox = styled.div`
@@ -48,7 +49,7 @@ export const StyledHighlightedBox = styled.pre`
   pointer-events: none;
   color: #000;
   z-index: 0;
-  margin-top: 0px;
+  margin-top: -7px;
   line-height: 1.5;
 `;
 
