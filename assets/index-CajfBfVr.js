@@ -116,6 +116,7 @@ export default theme;`}function createThemeNoVars(n={},...i){const{breakpoints:o
   font-size: 14px;
   outline: none;
   line-height: 1.5;
+  margin-top: -7px;
 `,StyledCodeInputBox=dt.div`
   position: relative;
   width: 100%;
@@ -140,7 +141,7 @@ export default theme;`}function createThemeNoVars(n={},...i){const{breakpoints:o
   pointer-events: none;
   color: #000;
   z-index: 0;
-  margin-top: 0px;
+  margin-top: -7px;
   line-height: 1.5;
 `,EditorBox=dt(Grid2)`
   min-height: 100vh;
